@@ -1,7 +1,7 @@
 package br.com.mathdebortoli.services;
 
 
-import br.com.mathdebortoli.models.PeopleModel;
+import br.com.mathdebortoli.models.PersonModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,31 +10,31 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
 
 @Service
-public class PeopleService {
+public class PersonService {
 
     private final AtomicLong counter = new AtomicLong();
-    private Logger logger = Logger.getLogger(PeopleService.class.getName());
+    private Logger logger = Logger.getLogger(PersonService.class.getName());
 
 
-    public List<PeopleModel> findAll() {
+    public List<PersonModel> findAll() {
         logger.info("Findind all Person!");
 
-        List<PeopleModel> people = new ArrayList<PeopleModel>();
+        List<PersonModel> people = new ArrayList<PersonModel>();
         for (int i = 0; i < 8; i++) {
-            PeopleModel person = personMocked(i);
+            PersonModel person = personMocked(i);
             people.add(person);
         }
 
         return people;
     }
 
-    public PeopleModel create(PeopleModel people){
+    public PersonModel create(PersonModel people){
         logger.info("Creating one Person!");
 
         return people;
     }
 
-    public PeopleModel update(PeopleModel people){
+    public PersonModel update(PersonModel people){
         logger.info("Updating one Person!");
 
         return people;
@@ -46,10 +46,10 @@ public class PeopleService {
 
 
 
-    public PeopleModel findById(String id) {
+    public PersonModel findById(String id) {
         logger.info("Findind by Id!");
 
-        PeopleModel person = new PeopleModel();
+        PersonModel person = new PersonModel();
         person.setId(counter.incrementAndGet());
         person.setNome("Matheus");
         person.setSobrenome("Debortoli");
@@ -59,8 +59,8 @@ public class PeopleService {
         return person;
     }
 
-    private  PeopleModel personMocked(int i){
-        PeopleModel person = new PeopleModel();
+    private PersonModel personMocked(int i){
+        PersonModel person = new PersonModel();
         person.setId(counter.incrementAndGet());
         person.setNome("Daniele " + i);
         person.setSobrenome("Debortoli");
