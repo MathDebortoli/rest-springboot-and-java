@@ -11,8 +11,8 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
     show-sql: false
+    open-in-view: false
   jackson:
     mapper:
       sort-properties-alphabetically: false
