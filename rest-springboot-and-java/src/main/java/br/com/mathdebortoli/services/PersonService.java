@@ -1,22 +1,23 @@
 package br.com.mathdebortoli.services;
 
 
+import br.com.mathdebortoli.controllers.TestLogController;
 import br.com.mathdebortoli.controllers.exception.ResourceNotFoundException;
 import br.com.mathdebortoli.models.PersonModel;
 import br.com.mathdebortoli.repository.PersonRepositoy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Logger;
 
 @Service
 public class PersonService {
 
     private final AtomicLong counter = new AtomicLong();
-    private Logger logger = Logger.getLogger(PersonService.class.getName());
+    private Logger logger = LoggerFactory.getLogger(TestLogController.class.getName());
 
     @Autowired
     PersonRepositoy repositoy;

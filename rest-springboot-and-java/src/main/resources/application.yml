@@ -16,3 +16,6 @@ spring:
   jackson:
     mapper:
       sort-properties-alphabetically: false
+logging:
+  level:
+    root: warn
