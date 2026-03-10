@@ -3,8 +3,12 @@ package br.com.mathdebortoli.services;
 
 import br.com.mathdebortoli.controllers.TestLogController;
 import br.com.mathdebortoli.controllers.exception.ResourceNotFoundException;
+import br.com.mathdebortoli.dto.PersonDto;
+import static br.com.mathdebortoli.mapper.ObjectMapper.parseListObjects;
+import static br.com.mathdebortoli.mapper.ObjectMapper.parseObject;
+
 import br.com.mathdebortoli.models.PersonModel;
-import br.com.mathdebortoli.repository.PersonRepositoy;
+import br.com.mathdebortoli.repository.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +24,21 @@ public class PersonService {
     private Logger logger = LoggerFactory.getLogger(TestLogController.class.getName());
 
     @Autowired
-    PersonRepositoy repositoy;
+    PersonRepository repositoy;
 
-    public List<PersonModel> findAll() {
+    public List<PersonDto> findAll() {
         logger.info("Findind all Person!");
-        return repositoy.findAll();
+        return parseListObjects(repositoy.findAll(),PersonDto.class);
     }
 
-    public PersonModel create(PersonModel person){
+    public PersonDto create(PersonDto person){
         logger.info("Creating one Person!");
-        return repositoy.save(person);
+
+        var entity = parseObject(person, PersonModel.class);
+        return parseObject(repositoy.save(entity),PersonDto.class);
     }
 
-    public PersonModel update(PersonModel person){
+    public PersonDto update(PersonDto person){
         logger.info("Updating one Person!");
 
         PersonModel entity = repositoy.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("Sem resultados para esse recurso!"));
@@ -41,7 +47,7 @@ public class PersonService {
         entity.setEndereco(person.getEndereco());
         entity.setGenero(person.getGenero());
 
-        return repositoy.save(entity);
+        return parseObject(repositoy.save(entity),PersonDto.class);
     }
 
     public void delete(Long id){
@@ -50,8 +56,9 @@ public class PersonService {
         repositoy.delete(entity);
     }
 
-    public PersonModel findById(Long id) {
+    public PersonDto findById(Long id) {
         logger.info("Findind by Id!");
-        return repositoy.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sem resultados para esse recurso!"));
+        var entity = repositoy.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sem resultados para esse recurso!"));
+        return parseObject(entity, PersonDto.class);
     }
 }
