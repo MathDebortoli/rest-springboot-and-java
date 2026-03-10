@@ -1,15 +1,17 @@
-package br.com.mathdebortoli.dto;
+package br.com.mathdebortoli.dto.v2;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
-public class PersonDto implements Serializable {
+public class PersonDtoV2 implements Serializable {
 
     private static final Long personModelUID = 1L;
 
     private Long id;
     private String nome;
     private String sobrenome;
+    private Date nascimento;
     private String endereco;
     private String genero;
 
@@ -53,15 +55,23 @@ public class PersonDto implements Serializable {
         this.genero = genero;
     }
 
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof br.com.mathdebortoli.models.PersonModel that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getNome(), that.getNome()) && Objects.equals(getSobrenome(), that.getSobrenome()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getGenero(), that.getGenero());
+        if (!(o instanceof PersonDtoV2 that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getNome(), that.getNome()) && Objects.equals(getSobrenome(), that.getSobrenome()) && Objects.equals(getNascimento(), that.getNascimento()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getGenero(), that.getGenero());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNome(), getSobrenome(), getEndereco(), getGenero());
+        return Objects.hash(getId(), getNome(), getSobrenome(), getNascimento(), getEndereco(), getGenero());
     }
 }
 

@@ -3,10 +3,12 @@ package br.com.mathdebortoli.services;
 
 import br.com.mathdebortoli.controllers.TestLogController;
 import br.com.mathdebortoli.controllers.exception.ResourceNotFoundException;
-import br.com.mathdebortoli.dto.PersonDto;
+import br.com.mathdebortoli.dto.v1.PersonDto;
 import static br.com.mathdebortoli.mapper.ObjectMapper.parseListObjects;
 import static br.com.mathdebortoli.mapper.ObjectMapper.parseObject;
 
+import br.com.mathdebortoli.dto.v2.PersonDtoV2;
+import br.com.mathdebortoli.mapper.custom.PersonMapper;
 import br.com.mathdebortoli.models.PersonModel;
 import br.com.mathdebortoli.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -26,6 +28,9 @@ public class PersonService {
     @Autowired
     PersonRepository repositoy;
 
+    @Autowired
+    PersonMapper converter;
+
     public List<PersonDto> findAll() {
         logger.info("Findind all Person!");
         return parseListObjects(repositoy.findAll(),PersonDto.class);
@@ -36,6 +41,13 @@ public class PersonService {
 
         var entity = parseObject(person, PersonModel.class);
         return parseObject(repositoy.save(entity),PersonDto.class);
+    }
+
+    public PersonDtoV2 createV2(PersonDtoV2 person){
+        logger.info("Creating one Person V2!");
+
+        var entity = converter.parseDtotoEntity(person);
+        return converter.parseEntityToDto(repositoy.save(entity));
     }
 
     public PersonDto update(PersonDto person){

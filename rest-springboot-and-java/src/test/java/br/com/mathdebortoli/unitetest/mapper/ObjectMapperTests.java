@@ -1,6 +1,6 @@
 package br.com.mathdebortoli.unitetest.mapper;
 
-import br.com.mathdebortoli.dto.PersonDto;
+import br.com.mathdebortoli.dto.v1.PersonDto;
 import br.com.mathdebortoli.mapper.ObjectMapper;
 import br.com.mathdebortoli.models.PersonModel;
 import br.com.mathdebortoli.unitetest.mapper.mocks.MockPerson;
