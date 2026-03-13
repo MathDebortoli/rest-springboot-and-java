@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: false
     open-in-view: false
 
@@ -19,7 +19,7 @@ spring:
       sort-properties-alphabetically: false
 
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migration
 
 logging:

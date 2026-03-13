@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -71,6 +72,9 @@ public class PersonService {
     public PersonDto findById(Long id) {
         logger.info("Findind by Id!");
         var entity = repositoy.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sem resultados para esse recurso!"));
-        return parseObject(entity, PersonDto.class);
+        var dto = parseObject(entity, PersonDto.class);
+        dto.setNascimento(new Date());
+        return dto;
+        //return parseObject(entity, PersonDto.class);
     }
 }
